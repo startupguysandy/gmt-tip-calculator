@@ -7,7 +7,11 @@ window.addEventListener('load', ()=> {
     //
     // Methods
     //
-    var calculateTip = function(event) {
+    function clickHandler() {
+        calculateTip();
+    }
+
+    function calculateTip() {
         let labelForTotal = document.getElementById('owed');
 
         let totalCost = allFields[0].value;
@@ -15,19 +19,15 @@ window.addEventListener('load', ()=> {
         let tipPercent = allFields[2].value / 100;
         let tipTotalAmount = totalCost * tipPercent;
 
-        console.log("Total Cost: " + totalCost);
-        console.log("Number of People: " + numPeople);
-        console.log("Tip Percent: " + tipPercent);
-
         labelForTotal.innerText = 'Total to tip: $'+tipTotalAmount;
-    };
+    }
 
     //
     // Inits and Event Listeners
     //
 
     // Listen for fields losing focus
-    document.documentElement.addEventListener('change', calculateTip, false);
+    document.documentElement.addEventListener('change', clickHandler, false);
 
 });
 
