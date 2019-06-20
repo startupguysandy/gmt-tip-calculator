@@ -3,23 +3,33 @@ window.addEventListener('load', ()=> {
     // Variables
     //
     let allFields = Array.from(document.querySelectorAll('.tip-calculator input'));
+    let tipTotalAmount = 0.0;
 
     //
     // Methods
     //
     function clickHandler() {
-        calculateTip();
+        calculateTipTotal();
+        calculatePerPerson();
     }
 
-    function calculateTip() {
+    function calculateTipTotal() {
         let labelForTotal = document.getElementById('owed');
 
         let totalCost = allFields[0].value;
-        let numPeople = allFields[1].value;
         let tipPercent = allFields[2].value / 100;
-        let tipTotalAmount = totalCost * tipPercent;
+        tipTotalAmount = totalCost * tipPercent;
 
         labelForTotal.innerText = 'Total to tip: $'+tipTotalAmount;
+    }
+
+    function calculatePerPerson() {
+        let labelForTotal = document.getElementById('perperson');
+
+        let numPeople = allFields[1].value;
+        let amountPerPerson = tipTotalAmount / numPeople;
+
+        labelForTotal.innerText = 'Tip per person: $'+amountPerPerson;
     }
 
     //
