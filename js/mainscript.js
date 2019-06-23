@@ -13,8 +13,8 @@ window.addEventListener('load', ()=> {
         runCalculations();
     }
 
-    function updateFields(editedField) {
-        editedField.target.setAttribute('data-edited', true);
+    function updateFields(currentField) {
+        currentField.target.setAttribute('data-edited', true);
     }
 
     function checkIfFieldsEdited(currentField) {
@@ -40,11 +40,14 @@ window.addEventListener('load', ()=> {
     function calculateTipTotal() {
         let labelForTotal = document.getElementById('owed');
 
-        let totalCost = allFields[0].value;
-        let tipPercent = allFields[2].value / 100;
-        tipTotalAmount = totalCost * tipPercent;
+        // calculate tip
+        let totalCost = parseFloat(allFields[0].value);
+        let tipPercent = parseFloat(allFields[2].value / 100);
+        tipTotalAmount = parseFloat(totalCost * tipPercent);
 
-        labelForTotal.innerText = 'Total to tip: $'+tipTotalAmount;
+        let totalIncludingTip = totalCost + tipTotalAmount;
+
+        labelForTotal.innerText = 'Total To Pay: $'+totalIncludingTip+' (includes a tip of $'+tipTotalAmount+')';
     }
 
     function calculatePerPerson() {
@@ -69,9 +72,9 @@ window.addEventListener('load', ()=> {
 //  - DONE: Listen for events happening on the page
 //  - DONE: Once a field has been updated (lost focus) then calculate amount to tip based on all fields
 //  - DONE: Once we've calculated the tip amount, split it out per person
-//  - Add the tip amount onto the total
+//  - DONE: Create a foreach loop which adds a data label to say if the fields been updated by the user, only perform the calculation once all 3 have been done
+//  - DONE: Add the tip amount onto the total. Make it like "Total Amount to Pay: $24 (include $4 tip)"
 //  - Validate the type of info in the fields, make sure it's valid
-//  - Create a foreach loop which adds a data label to say if the fields been updated by the user, only perform the calculation once all 3 have been done
 
 
 /*
