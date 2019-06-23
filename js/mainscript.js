@@ -8,9 +8,33 @@ window.addEventListener('load', ()=> {
     //
     // Methods
     //
-    function clickHandler() {
-        calculateTipTotal();
-        calculatePerPerson();
+    function clickHandler(event) {
+        updateFields(event);
+        runCalculations();
+    }
+
+    function updateFields(editedField) {
+        editedField.target.setAttribute('data-edited', true);
+    }
+
+    function checkIfFieldsEdited(currentField) {
+        return currentField === 'true';
+    }
+
+    function permissionToCalculate() {
+        let editedFieldTracker = [];
+        for(let item of allFields) {
+            editedFieldTracker.push(item.getAttribute('data-edited'));
+        }
+
+        return editedFieldTracker.every(checkIfFieldsEdited);
+    }
+
+    function runCalculations() {
+        if(permissionToCalculate() === true) {
+            calculateTipTotal();
+            calculatePerPerson();
+        }
     }
 
     function calculateTipTotal() {
@@ -26,7 +50,7 @@ window.addEventListener('load', ()=> {
     function calculatePerPerson() {
         let labelForTotal = document.getElementById('perperson');
 
-        let numPeople = allFields[1].value;
+        let numPeople = allFields[1].value; // TODO: Get the field by the name, not the index number
         let amountPerPerson = tipTotalAmount / numPeople;
 
         labelForTotal.innerText = 'Tip per person: $'+amountPerPerson;
@@ -42,11 +66,12 @@ window.addEventListener('load', ()=> {
 });
 
 // TODO:
-//  - Listen for events happening on the page
-//  - Once a field has been updated (lost focus) then calculate amount to tip based on all fields
-//  - Once we've calculated the tip amount, split it out per person
+//  - DONE: Listen for events happening on the page
+//  - DONE: Once a field has been updated (lost focus) then calculate amount to tip based on all fields
+//  - DONE: Once we've calculated the tip amount, split it out per person
+//  - Add the tip amount onto the total
 //  - Validate the type of info in the fields, make sure it's valid
-//  - Don't take any action unless all 3 fields are completed
+//  - Create a foreach loop which adds a data label to say if the fields been updated by the user, only perform the calculation once all 3 have been done
 
 
 /*
