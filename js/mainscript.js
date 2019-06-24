@@ -14,11 +14,33 @@ window.addEventListener('load', ()=> {
     }
 
     function updateFields(currentField) {
-        currentField.target.setAttribute('data-edited', true);
+        if(checkField(currentField) === true) {
+            currentField.target.setAttribute('data-edited', true);
+        }
     }
 
     function checkIfFieldsEdited(currentField) {
         return currentField === 'true';
+    }
+
+    function checkField(fieldToCheck) {
+        if(fieldToCheck.target.value === "") {
+            alert('Error: Field is empty!');
+            fieldToCheck.target.focus();
+            return false;
+        }
+
+        // regular expression to match only alphanumeric characters and spaces
+        var regularExpression = /^[\w ]+$/;
+
+        // validation fails if the input doesn't match our regular expression
+        if(!regularExpression.test(fieldToCheck.target.value)) {
+            alert("Error: Input contains invalid characters!");
+            fieldToCheck.target.focus();
+            return false;
+        }
+
+        return true;
     }
 
     function permissionToCalculate() {
@@ -74,7 +96,7 @@ window.addEventListener('load', ()=> {
 //  - DONE: Once we've calculated the tip amount, split it out per person
 //  - DONE: Create a foreach loop which adds a data label to say if the fields been updated by the user, only perform the calculation once all 3 have been done
 //  - DONE: Add the tip amount onto the total. Make it like "Total Amount to Pay: $24 (include $4 tip)"
-//  - Validate the type of info in the fields, make sure it's valid
+//  - DONE: Validate the type of info in the fields, make sure it's valid
 
 
 /*
