@@ -89,21 +89,3 @@ window.addEventListener('load', ()=> {
     document.documentElement.addEventListener('change', clickHandler, false);
 
 });
-
-// TODO:
-//  - DONE: Listen for events happening on the page
-//  - DONE: Once a field has been updated (lost focus) then calculate amount to tip based on all fields
-//  - DONE: Once we've calculated the tip amount, split it out per person
-//  - DONE: Create a foreach loop which adds a data label to say if the fields been updated by the user, only perform the calculation once all 3 have been done
-//  - DONE: Add the tip amount onto the total. Make it like "Total Amount to Pay: $24 (include $4 tip)"
-//  - DONE: Validate the type of info in the fields, make sure it's valid
-
-
-/*
- * Things to do:
- * - Get all of the fields.
- * - Listen for form submissions (I think he means on fields losing focus)
- * - Calculate the tip as a percentage of the total bill.
- * - Add the tip to the total.
- * - Calculate the per-person amount by dividing the total with tip among the total number of people.
- */
